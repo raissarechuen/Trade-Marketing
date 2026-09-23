@@ -40,7 +40,7 @@
                         <h1 class="text-base font-bold leading-none text-white tracking-wide">Trade Marketing</h1>
                         <span class="bg-gradient-to-r from-pink-500 to-purple-600 text-[10px] font-extrabold px-1.5 py-0.5 rounded text-white">+L</span>
                     </div>
-                    <span class="text-xs text-pink-300/80 font-light">Regional Leste (RJ / ES)</span>
+                    <span class="text-xs text-pink-300/80 font-light">Regional Leste</span>
                 </div>
             </div>
 
@@ -69,7 +69,7 @@
                     </h2>
                     <h3 id="muralTitle" class="text-lg font-bold text-pink-300 mt-1">Lançamento de Ofertas Semanal</h3>
                     <p id="muralDesc" class="text-xs md:text-sm text-gray-300 mt-1.5 leading-relaxed max-w-4xl">
-                        Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas para RJ e ES.
+                        Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas da Regional Leste.
                     </p>
                 </div>
             </div>
@@ -100,11 +100,13 @@
             </div>
         </div>
 
-        <!-- Filtros Rápidos -->
+        <!-- Filtros Rápidos por Território -->
         <div class="flex flex-wrap gap-2 mb-6">
-            <button id="btnUF-TODOS" onclick="setUF('TODOS')" class="uf-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md">Todas UFs</button>
-            <button id="btnUF-RJ" onclick="setUF('RJ')" class="uf-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Rio de Janeiro (RJ)</button>
-            <button id="btnUF-ES" onclick="setUF('ES')" class="uf-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Espírito Santo (ES)</button>
+            <button id="btnTerritorio-TODOS" onclick="setTerritorio('TODOS')" class="territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md">Todos os Territórios</button>
+            <button id="btnTerritorio-Grande Rio" onclick="setTerritorio('Grande Rio')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Grande Rio</button>
+            <button id="btnTerritorio-Rio Litoral" onclick="setTerritorio('Rio Litoral')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Rio Litoral</button>
+            <button id="btnTerritorio-Rio Interior" onclick="setTerritorio('Rio Interior')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Rio Interior</button>
+            <button id="btnTerritorio-Espírito Santo" onclick="setTerritorio('Espírito Santo')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Espírito Santo</button>
         </div>
 
         <!-- Grid de Materiais -->
@@ -140,11 +142,13 @@
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs font-bold text-pink-300 mb-1">UF / Região</label>
-                        <select id="matUF" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
-                            <option value="GERAL">Geral (Leste)</option>
-                            <option value="RJ">Rio de Janeiro (RJ)</option>
-                            <option value="ES">Espírito Santo (ES)</option>
+                        <label class="block text-xs font-bold text-pink-300 mb-1">Território</label>
+                        <select id="matTerritorio" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
+                            <option value="Geral">Geral (Leste)</option>
+                            <option value="Grande Rio">Grande Rio</option>
+                            <option value="Rio Litoral">Rio Litoral</option>
+                            <option value="Rio Interior">Rio Interior</option>
+                            <option value="Espírito Santo">Espírito Santo</option>
                         </select>
                     </div>
                     <div>
@@ -229,12 +233,12 @@
     <!-- Lógica Vanilla JS -->
     <script>
         let isAdmin = false;
-        let selectedUF = 'TODOS';
+        let selectedTerritorio = 'TODOS';
 
         let materials = [
-            { id: 1, title: 'Lâmina de Ofertas Controle & Pós-Pago', category: 'Lâmina de ofertas', channel: 'Loja Própria, Revenda', uf: 'RJ', date: '23/09/2026', format: 'PDF', fileUrl: '#' },
-            { id: 2, title: 'Guia Visual Vitrine & MPDV Primavera', category: 'Manuais de VM', channel: 'Todos os Canais', uf: 'GERAL', date: '22/09/2026', format: 'PDF', fileUrl: '#' },
-            { id: 3, title: 'Enxoval de Comunicação Regional Leste', category: 'Enxoval Território', channel: 'Loja Própria, PAP', uf: 'ES', date: '21/09/2026', format: 'ZIP', fileUrl: '#' }
+            { id: 1, title: 'Lâmina de Ofertas Controle & Pós-Pago', category: 'Lâmina de ofertas', channel: 'Loja Própria, Revenda', territorio: 'Grande Rio', date: '23/09/2026', format: 'PDF', fileUrl: '#' },
+            { id: 2, title: 'Guia Visual Vitrine & MPDV Primavera', category: 'Manuais de VM', channel: 'Todos os Canais', territorio: 'Geral', date: '22/09/2026', format: 'PDF', fileUrl: '#' },
+            { id: 3, title: 'Enxoval de Comunicação Regional Leste', category: 'Enxoval Território', channel: 'Loja Própria, PAP', territorio: 'Espírito Santo', date: '21/09/2026', format: 'ZIP', fileUrl: '#' }
         ];
 
         function renderMaterials() {
@@ -243,8 +247,9 @@
 
             const filtered = materials.filter(m => {
                 const matchesSearch = m.title.toLowerCase().includes(search) || m.category.toLowerCase().includes(search) || m.channel.toLowerCase().includes(search);
-                const matchesUF = selectedUF === 'TODOS' || m.uf === selectedUF || m.uf === 'GERAL';
-                return matchesSearch && matchesUF;
+                const itemTerritorio = m.territorio || m.uf || 'Geral';
+                const matchesTerritorio = selectedTerritorio === 'TODOS' || itemTerritorio === selectedTerritorio || itemTerritorio === 'Geral' || itemTerritorio === 'GERAL';
+                return matchesSearch && matchesTerritorio;
             });
 
             if (filtered.length === 0) {
@@ -257,7 +262,7 @@
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-pink-500/20 text-pink-300 border border-pink-500/40 uppercase tracking-wider">${m.category}</span>
-                            <span class="text-xs font-bold text-gray-400 bg-gray-900/80 px-2 py-0.5 rounded-md">${m.uf}</span>
+                            <span class="text-xs font-bold text-gray-400 bg-gray-900/80 px-2 py-0.5 rounded-md">${m.territorio || m.uf || 'Geral'}</span>
                         </div>
                         <h3 class="font-bold text-white text-sm mb-1 line-clamp-2">${m.title}</h3>
                         <p class="text-[11px] text-gray-400 mb-3">
@@ -302,14 +307,17 @@
             renderMaterials();
         }
 
-        function setUF(uf) {
-            selectedUF = uf;
-            ['TODOS', 'RJ', 'ES'].forEach(u => {
-                const btn = document.getElementById(`btnUF-${u}`);
-                if (u === uf) {
-                    btn.className = "uf-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md";
-                } else {
-                    btn.className = "uf-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition";
+        function setTerritorio(ter) {
+            selectedTerritorio = ter;
+            const territorios = ['TODOS', 'Grande Rio', 'Rio Litoral', 'Rio Interior', 'Espírito Santo'];
+            territorios.forEach(t => {
+                const btn = document.getElementById(`btnTerritorio-${t}`);
+                if (btn) {
+                    if (t === ter) {
+                        btn.className = "territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md";
+                    } else {
+                        btn.className = "territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition";
+                    }
                 }
             });
             renderMaterials();
@@ -350,7 +358,7 @@
             document.getElementById('editingId').value = mat.id;
             document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-pen text-pink-500"></i> Editar Material`;
             document.getElementById('matTitle').value = mat.title;
-            document.getElementById('matUF').value = mat.uf;
+            document.getElementById('matTerritorio').value = mat.territorio || mat.uf || 'Geral';
             document.getElementById('matCategory').value = mat.category;
             setSelectedChannels(mat.channel);
 
@@ -366,7 +374,7 @@
 
             const editingId = document.getElementById('editingId').value;
             const title = document.getElementById('matTitle').value;
-            const uf = document.getElementById('matUF').value;
+            const territorio = document.getElementById('matTerritorio').value;
             const category = document.getElementById('matCategory').value;
             const channel = getSelectedChannels();
             const fileInput = document.getElementById('matFile');
@@ -378,7 +386,7 @@
                 const mat = materials.find(m => m.id == editingId);
                 if (mat) {
                     mat.title = title;
-                    mat.uf = uf;
+                    mat.territorio = territorio;
                     mat.category = category;
                     mat.channel = channel;
                     mat.date = dateStr;
@@ -401,7 +409,7 @@
 
                 materials.unshift({
                     id: Date.now(),
-                    title, category, channel, uf, date: dateStr, format, fileUrl
+                    title, category, channel, territorio, date: dateStr, format, fileUrl
                 });
             }
 
