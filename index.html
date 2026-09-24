@@ -72,9 +72,9 @@
                     <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-pink-200 to-pink-400 tracking-wider uppercase mb-2">
                         A MATEMÁTICA NÃO EXPLICA A LESTE
                     </h2>
-                    <h3 id="muralTitle" class="text-lg font-bold text-pink-300 mt-1">Carregando Mural...</h3>
+                    <h3 id="muralTitle" class="text-lg font-bold text-pink-300 mt-1">Lançamento de Ofertas Semanal</h3>
                     <p id="muralDesc" class="text-xs md:text-sm text-gray-300 mt-1.5 leading-relaxed max-w-4xl">
-                        Aguarde um momento...
+                        Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas da Regional Leste.
                     </p>
                 </div>
             </div>
@@ -116,7 +116,7 @@
 
         <!-- Grid de Materiais -->
         <div id="materialsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Cards gerados via Firebase -->
+            <!-- Cards gerados dinamicamente -->
         </div>
 
     </main>
@@ -193,8 +193,9 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-pink-300 mb-1">Link/URL do Arquivo (SharePoint/OneDrive)</label>
-                    <input type="url" id="matFileUrl" placeholder="https://..." class="w-full border border-pink-900/60 rounded-xl p-2.5 text-xs text-white bg-black/80">
+                    <label class="block text-xs font-bold text-pink-300 mb-1">Anexar Arquivo ou Link</label>
+                    <input type="file" id="matFile" class="w-full border border-pink-900/60 rounded-xl p-2 text-xs text-gray-300 bg-black/50 mb-2">
+                    <input type="url" id="matFileUrl" placeholder="Ou cole um link do SharePoint/OneDrive (https://...)" class="w-full border border-pink-900/60 rounded-xl p-2 text-xs text-white bg-black/80">
                 </div>
 
                 <div class="pt-3 flex gap-2">
@@ -235,9 +236,9 @@
         </div>
     </div>
 
-    <!-- Firebase Init & Lógica -->
+    <!-- Lógica Vanilla JS + Firebase Seguro -->
     <script>
-     
+    
 const firebaseConfig = {
   apiKey: "AIzaSyDKIlUQOZeei-mjDKskYfPcNMtFH5JCpfw",
   authDomain: "trade-leste-vivo-23220.firebaseapp.com",
@@ -246,38 +247,48 @@ const firebaseConfig = {
   messagingSenderId: "877918917984",
   appId: "1:877918917984:web:750eba355fd1a5ddcdba05"
 };
-        };
+        let db = null;
+        let useFirebase = false;
 
-        // Inicializa o Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        try {
+            if (typeof firebase !== 'undefined' && firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('COLE')) {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                useFirebase = true;
+            }
+        } catch (e) {
+            console.warn("Rodando em modo local sem Firebase:", e);
+        }
 
         let isAdmin = false;
         let selectedTerritorio = 'TODOS';
-        let materials = [];
+        
+        let materials = [
+            { id: '1', title: 'Lâmina de Ofertas Controle & Pós-Pago', category: 'Lâmina de ofertas', channel: 'Loja Própria, Revenda', territorio: 'Grande Rio', date: '23/09/2026', format: 'PDF', fileUrl: '#' },
+            { id: '2', title: 'Guia Visual Vitrine & MPDV Primavera', category: 'Manuais de VM', channel: 'Todos os Canais', territorio: 'Geral', date: '22/09/2026', format: 'PDF', fileUrl: '#' },
+            { id: '3', title: 'Enxoval de Comunicação Regional Leste', category: 'Enxoval Território', channel: 'Loja Própria, PAP', territorio: 'Espírito Santo', date: '21/09/2026', format: 'ZIP', fileUrl: '#' }
+        ];
 
-        // Conexão em Tempo Real para os Materiais
-        db.collection("materials").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-            materials = [];
-            snapshot.forEach(doc => {
-                materials.push({ id: doc.id, ...doc.data() });
-            });
-            renderMaterials();
-        });
-
-        // Conexão em Tempo Real para o Mural
-        db.collection("settings").doc("mural").onSnapshot(doc => {
-            if (doc.exists) {
-                const data = doc.data();
-                document.getElementById('muralTitle').innerText = data.title || "Lançamento de Ofertas Semanal";
-                document.getElementById('muralDesc').innerText = data.desc || "Repositório unificado de materiais da Regional Leste.";
-            } else {
-                db.collection("settings").doc("mural").set({
-                    title: "Lançamento de Ofertas Semanal",
-                    desc: "Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas da Regional Leste."
+        if (useFirebase) {
+            db.collection("materials").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+                let remoteMaterials = [];
+                snapshot.forEach(doc => {
+                    remoteMaterials.push({ id: doc.id, ...doc.data() });
                 });
-            }
-        });
+                if (remoteMaterials.length > 0) {
+                    materials = remoteMaterials;
+                }
+                renderMaterials();
+            }, err => console.log("Erro no Firestore:", err));
+
+            db.collection("settings").doc("mural").onSnapshot(doc => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data.title) document.getElementById('muralTitle').innerText = data.title;
+                    if (data.desc) document.getElementById('muralDesc').innerText = data.desc;
+                }
+            });
+        }
 
         function renderMaterials() {
             const grid = document.getElementById('materialsGrid');
@@ -285,15 +296,15 @@ const firebaseConfig = {
 
             const filtered = materials.filter(m => {
                 const matchesSearch = (m.title || '').toLowerCase().includes(search) || 
-                              (m.category || '').toLowerCase().includes(search) || 
-                              (m.channel || '').toLowerCase().includes(search);
+                                      (m.category || '').toLowerCase().includes(search) || 
+                                      (m.channel || '').toLowerCase().includes(search);
                 const itemTerritorio = m.territorio || m.uf || 'Geral';
                 const matchesTerritorio = selectedTerritorio === 'TODOS' || itemTerritorio === selectedTerritorio || itemTerritorio === 'Geral' || itemTerritorio === 'GERAL';
                 return matchesSearch && matchesTerritorio;
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado no repositório.</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado.</div>`;
                 return;
             }
 
@@ -310,8 +321,8 @@ const firebaseConfig = {
                         </p>
                     </div>
                     <div class="flex items-center justify-between border-t border-gray-800/80 pt-3 mt-2">
-                        <a href="${m.fileUrl || '#'}" target="_blank" download="${m.title}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow">
-                            <i class="fa-solid fa-download"></i> Baixar / Acessar
+                        <a href="${m.fileUrl || '#'}" ${m.fileUrl && m.fileUrl !== '#' ? 'target="_blank"' : ''} download="${m.title}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow">
+                            <i class="fa-solid fa-download"></i> Baixar (${m.format || 'PDF'})
                         </a>
                         ${isAdmin ? `
                             <div class="flex items-center gap-2">
@@ -392,7 +403,7 @@ const firebaseConfig = {
         }
 
         function openEditModal(id) {
-            const mat = materials.find(m => m.id === id);
+            const mat = materials.find(m => String(m.id) === String(id));
             if (!mat) return;
 
             document.getElementById('editingId').value = mat.id;
@@ -418,7 +429,17 @@ const firebaseConfig = {
             const territorio = document.getElementById('matTerritorio').value;
             const category = document.getElementById('matCategory').value;
             const channel = getSelectedChannels();
-            const fileUrl = document.getElementById('matFileUrl').value || '#';
+            const fileInput = document.getElementById('matFile');
+            const fileUrlInput = document.getElementById('matFileUrl').value;
+
+            let fileUrl = fileUrlInput || '#';
+            let format = 'PDF';
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                format = file.name.split('.').pop().toUpperCase();
+                fileUrl = URL.createObjectURL(file);
+            }
 
             const today = new Date();
             const dateStr = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
@@ -429,18 +450,30 @@ const firebaseConfig = {
                 category,
                 channel,
                 fileUrl,
-                date: dateStr,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                format,
+                date: dateStr
             };
 
-            if (editingId) {
-                db.collection("materials").doc(editingId).update(payload)
-                    .then(() => closeUploadModal())
-                    .catch(err => alert("Erro ao atualizar: " + err.message));
+            if (useFirebase) {
+                payload.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+                if (editingId) {
+                    db.collection("materials").doc(editingId).update(payload)
+                        .then(() => closeUploadModal())
+                        .catch(err => alert("Erro ao atualizar: " + err.message));
+                } else {
+                    db.collection("materials").add(payload)
+                        .then(() => closeUploadModal())
+                        .catch(err => alert("Erro ao salvar: " + err.message));
+                }
             } else {
-                db.collection("materials").add(payload)
-                    .then(() => closeUploadModal())
-                    .catch(err => alert("Erro ao salvar: " + err.message));
+                if (editingId) {
+                    const mat = materials.find(m => String(m.id) === String(editingId));
+                    if (mat) Object.assign(mat, payload);
+                } else {
+                    materials.unshift({ id: String(Date.now()), ...payload });
+                }
+                renderMaterials();
+                closeUploadModal();
             }
         }
 
@@ -459,17 +492,31 @@ const firebaseConfig = {
             const title = document.getElementById('editMuralTitle').value;
             const desc = document.getElementById('editMuralDesc').value;
 
-            db.collection("settings").doc("mural").set({ title, desc })
-                .then(() => closeMuralModal())
-                .catch(err => alert("Erro ao atualizar o mural: " + err.message));
+            document.getElementById('muralTitle').innerText = title;
+            document.getElementById('muralDesc').innerText = desc;
+
+            if (useFirebase) {
+                db.collection("settings").doc("mural").set({ title, desc })
+                    .then(() => closeMuralModal())
+                    .catch(err => alert("Erro no mural: " + err.message));
+            } else {
+                closeMuralModal();
+            }
         }
 
         function deleteMaterial(id) {
-            if (confirm('Excluir este material do repositório permanentemente?')) {
-                db.collection("materials").doc(id).delete()
-                    .catch(err => alert("Erro ao excluir: " + err.message));
+            if (confirm('Excluir este material do repositório?')) {
+                if (useFirebase) {
+                    db.collection("materials").doc(id).delete()
+                        .catch(err => alert("Erro ao excluir: " + err.message));
+                } else {
+                    materials = materials.filter(m => String(m.id) !== String(id));
+                    renderMaterials();
+                }
             }
         }
+
+        renderMaterials();
     </script>
 </body>
 </html>
