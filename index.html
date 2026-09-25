@@ -1,543 +1,643 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Marketing Leste - Vivo (+L)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Marketing Leste - Vivo (+L)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
 
-    <style>
         body {
+
             background-color: #07030d;
+
             background-image: 
+
                 radial-gradient(circle at 50% 0%, rgba(226, 0, 116, 0.25) 0%, transparent 60%),
+
                 radial-gradient(circle at 100% 100%, rgba(102, 0, 153, 0.2) 0%, transparent 50%);
+
         }
+
         .neon-border {
+
             box-shadow: 0 0 15px rgba(226, 0, 116, 0.4), inset 0 0 10px rgba(226, 0, 116, 0.2);
+
             border: 1px solid rgba(226, 0, 116, 0.6);
+
         }
+
         .neon-card:hover {
+
             box-shadow: 0 0 20px rgba(226, 0, 116, 0.5), 0 0 10px rgba(102, 0, 153, 0.5);
+
             border-color: rgba(226, 0, 116, 0.8);
+
         }
+
         .math-bg {
+
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' fill='rgba(255,255,255,0.03)' font-size='12' font-family='monospace'%3Ee%5Ei%CF%80%2B1%3D0%3C/text%3E%3Ctext x='50' y='70' fill='rgba(255,255,255,0.03)' font-size='12' font-family='monospace'%3E%E2%88%91x%5En%3C/text%3E%3C/svg%3E");
+
         }
-    </style>
+</style>
 </head>
 <body class="font-sans text-gray-100 min-h-screen flex flex-col math-bg">
+<!-- Header / Navbar -->
+<header class="bg-black/60 backdrop-blur-md border-b border-pink-900/40 sticky top-0 z-40">
+<div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+<div class="flex items-center space-x-3">
+<div class="bg-white text-black font-extrabold text-xl px-2.5 py-0.5 rounded-md tracking-wider">
 
-    <!-- Header / Navbar -->
-    <header class="bg-black/60 backdrop-blur-md border-b border-pink-900/40 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white text-black font-extrabold text-xl px-2.5 py-0.5 rounded-md tracking-wider">
                     vivo
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="text-base font-bold leading-none text-white tracking-wide">Trade Marketing</h1>
-                        <span class="bg-gradient-to-r from-pink-500 to-purple-600 text-[10px] font-extrabold px-1.5 py-0.5 rounded text-white">+L</span>
-                    </div>
-                    <span class="text-xs text-pink-300/80 font-light">Regional Leste</span>
-                </div>
-            </div>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="text-base font-bold leading-none text-white tracking-wide">Trade Marketing</h1>
+<span class="bg-gradient-to-r from-pink-500 to-purple-600 text-[10px] font-extrabold px-1.5 py-0.5 rounded text-white">+L</span>
+</div>
+<span class="text-xs text-pink-300/80 font-light">Regional Leste</span>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span id="adminBadge" class="hidden bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-xs font-extrabold px-2.5 py-0.5 rounded-full shadow-lg">
+<i class="fa-solid fa-user-shield"></i> ADM
+</span>
+<button id="adminBtn" type="button" onclick="toggleAdmin()" class="bg-purple-950/80 hover:bg-purple-900 text-xs text-pink-200 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 border border-pink-500/30 cursor-pointer">
+<i class="fa-solid fa-lock" id="adminIcon"></i>
+<span id="adminBtnText">Acesso Adm</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Banner / Mural Temático Leste -->
+<section class="py-6 px-4 relative overflow-hidden">
+<div class="max-w-7xl mx-auto bg-gradient-to-r from-black/80 via-purple-950/50 to-black/80 rounded-3xl p-6 md:p-8 neon-border relative">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 z-10 relative">
+<div class="w-full">
+<div class="inline-flex items-center gap-2 bg-pink-500/20 text-pink-300 text-xs px-3 py-1 rounded-full border border-pink-500/40 font-semibold tracking-widest uppercase mb-3">
+<i class="fa-solid fa-bolt text-pink-400"></i> Regional Leste
+</div>
+<h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-pink-200 to-pink-400 tracking-wider uppercase mb-2">
 
-            <div class="flex items-center space-x-2">
-                <span id="adminBadge" class="hidden bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-xs font-extrabold px-2.5 py-0.5 rounded-full shadow-lg">
-                    <i class="fa-solid fa-user-shield"></i> ADM
-                </span>
-                <button id="adminBtn" type="button" onclick="toggleAdmin()" class="bg-purple-950/80 hover:bg-purple-900 text-xs text-pink-200 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 border border-pink-500/30 cursor-pointer">
-                    <i class="fa-solid fa-lock" id="adminIcon"></i>
-                    <span id="adminBtnText">Acesso Adm</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Banner / Mural Temático Leste -->
-    <section class="py-6 px-4 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto bg-gradient-to-r from-black/80 via-purple-950/50 to-black/80 rounded-3xl p-6 md:p-8 neon-border relative">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 z-10 relative">
-                <div class="w-full">
-                    <div class="inline-flex items-center gap-2 bg-pink-500/20 text-pink-300 text-xs px-3 py-1 rounded-full border border-pink-500/40 font-semibold tracking-widest uppercase mb-3">
-                        <i class="fa-solid fa-bolt text-pink-400"></i> Regional Leste
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-pink-200 to-pink-400 tracking-wider uppercase mb-2">
                         A MATEMÁTICA NÃO EXPLICA A LESTE
-                    </h2>
-                    <h3 id="muralTitle" class="text-lg font-bold text-pink-300 mt-1">Lançamento de Ofertas Semanal</h3>
-                    <p id="muralDesc" class="text-xs md:text-sm text-gray-300 mt-1.5 leading-relaxed max-w-4xl">
+</h2>
+<h3 id="muralTitle" class="text-lg font-bold text-pink-300 mt-1">Lançamento de Ofertas Semanal</h3>
+<p id="muralDesc" class="text-xs md:text-sm text-gray-300 mt-1.5 leading-relaxed max-w-4xl">
+
                         Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas da Regional Leste.
-                    </p>
-                </div>
-            </div>
+</p>
+</div>
+</div>
+<div id="admEditMuralBtn" class="hidden mt-4 pt-4 border-t border-pink-900/40 flex justify-end">
+<button type="button" onclick="openMuralModal()" class="bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold px-3 py-2 rounded-xl shadow flex items-center gap-1.5 transition cursor-pointer">
+<i class="fa-solid fa-pen"></i> Editar Mural
+</button>
+</div>
+</div>
+</section>
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto px-4 py-4 flex-1 w-full">
+<!-- Barra de Busca e Botão de Novo Material -->
+<div class="flex flex-col md:flex-row justify-between items-center gap-3 mb-6">
+<div class="relative w-full md:w-96">
+<i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+<input type="text" id="searchInput" oninput="renderMaterials()" placeholder="Buscar material, oferta, VM, canal..." 
 
-            <div id="admEditMuralBtn" class="hidden mt-4 pt-4 border-t border-pink-900/40 flex justify-end">
-                <button type="button" onclick="openMuralModal()" class="bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold px-3 py-2 rounded-xl shadow flex items-center gap-1.5 transition cursor-pointer">
-                    <i class="fa-solid fa-pen"></i> Editar Mural
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-4 flex-1 w-full">
-
-        <!-- Barra de Busca e Botão de Novo Material -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-3 mb-6">
-            <div class="relative w-full md:w-96">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" id="searchInput" oninput="renderMaterials()" placeholder="Buscar material, oferta, VM, canal..." 
                     class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-pink-900/50 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-black/60 text-white placeholder-gray-500 shadow-inner">
-            </div>
+</div>
+<div id="addMaterialBtnContainer" class="hidden w-full md:w-auto">
+<button type="button" onclick="openUploadModal()" class="w-full md:w-auto bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center gap-2 border border-pink-400/30 cursor-pointer">
+<i class="fa-solid fa-plus"></i> Novo Material
+</button>
+</div>
+</div>
+<!-- Filtros Rápidos por Território -->
+<div class="flex flex-wrap gap-2 mb-6">
+<button type="button" id="btnTerritorio-TODOS" onclick="setTerritorio('TODOS')" class="territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer">Todos os Territórios</button>
+<button type="button" id="btnTerritorio-Grande Rio" onclick="setTerritorio('Grande Rio')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Grande Rio</button>
+<button type="button" id="btnTerritorio-Rio Litoral" onclick="setTerritorio('Rio Litoral')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Rio Litoral</button>
+<button type="button" id="btnTerritorio-Rio Interior" onclick="setTerritorio('Rio Interior')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Rio Interior</button>
+<button type="button" id="btnTerritorio-Espírito Santo" onclick="setTerritorio('Espírito Santo')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Espírito Santo</button>
+</div>
+<!-- Grid de Materiais -->
+<div id="materialsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Cards gerados dinamicamente -->
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black/80 border-t border-pink-900/30 mt-8 py-5 text-center text-xs text-gray-500">
+<p>Portal de Trade Marketing Leste • Vivo Regional Leste <span class="text-pink-500 font-bold">+L</span></p>
+</footer>
+<!-- MODAL: Subir / Editar Material -->
+<div id="uploadModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+<div class="bg-gray-950 rounded-2xl max-w-md w-full p-6 border border-pink-500/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+<button type="button" onclick="closeUploadModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer">
+<i class="fa-solid fa-xmark text-xl"></i>
+</button>
+<h3 id="modalFormTitle" class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+<i class="fa-solid fa-cloud-arrow-up text-pink-500"></i> Adicionar Novo Material
+</h3>
+<form id="uploadForm" onsubmit="handleUpload(event)" class="space-y-3">
+<input type="hidden" id="editingId" value="">
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1">Título do Material</label>
+<input type="text" id="matTitle" required placeholder="Ex: Lâmina Ofertas Fibra" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white focus:ring-2 focus:ring-pink-500">
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1">Território</label>
+<select id="matTerritorio" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
+<option value="Geral">Geral (Leste)</option>
+<option value="Grande Rio">Grande Rio</option>
+<option value="Rio Litoral">Rio Litoral</option>
+<option value="Rio Interior">Rio Interior</option>
+<option value="Espírito Santo">Espírito Santo</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1">Categoria</label>
+<select id="matCategory" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
+<option value="Lâmina de ofertas">Lâmina de ofertas</option>
+<option value="Capacitação">Capacitação</option>
+<option value="Manuais de VM">Manuais de VM</option>
+<option value="Enxoval Território">Enxoval Território</option>
+<option value="Outros">Outros</option>
+</select>
+</div>
+</div>
+<!-- Seleção Múltipla de Canais de Venda -->
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1.5">Canal de Venda (Selecione um ou mais)</label>
+<div class="bg-black/80 border border-pink-900/60 rounded-xl p-3 space-y-2">
+<label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
+<input type="checkbox" name="channelOption" value="Loja Própria" class="rounded accent-pink-600">
+<span>Loja Própria</span>
+</label>
+<label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
+<input type="checkbox" name="channelOption" value="Revenda" class="rounded accent-pink-600">
+<span>Revenda</span>
+</label>
+<label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
+<input type="checkbox" name="channelOption" value="PAP" class="rounded accent-pink-600">
+<span>PAP</span>
+</label>
+<label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
+<input type="checkbox" name="channelOption" value="Distribuição" class="rounded accent-pink-600">
+<span>Distribuição</span>
+</label>
+</div>
+<p class="text-[10px] text-pink-300/70 mt-1">* Se nenhum canal for marcado, será considerado "Todos os Canais".</p>
+</div>
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1">Link/URL do Arquivo (SharePoint/OneDrive)</label>
+<input type="url" id="matFileUrl" required placeholder="https://..." class="w-full border border-pink-900/60 rounded-xl p-2.5 text-xs text-white bg-black/80">
+</div>
+<div class="pt-3 flex gap-2">
+<button type="button" onclick="closeUploadModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
+<button type="submit" id="saveMatBtn" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg cursor-pointer">Salvar Material</button>
+</div>
+</form>
+</div>
+</div>
+<!-- MODAL: Editar Mural -->
+<div id="muralModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+<div class="bg-gray-950 rounded-2xl max-w-md w-full p-6 border border-pink-500/40 shadow-2xl relative">
+<button type="button" onclick="closeMuralModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer">
+<i class="fa-solid fa-xmark text-xl"></i>
+</button>
+<h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+<i class="fa-solid fa-pen-to-square text-pink-500"></i> Editar Mural da Semana
+</h3>
+<form onsubmit="handleMuralSave(event)" class="space-y-3">
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1">Subtítulo / Destaque</label>
+<input type="text" id="editMuralTitle" required class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
+</div>
+<div>
+<label class="block text-xs font-bold text-pink-300 mb-1">Aviso para a Força de Vendas</label>
+<textarea id="editMuralDesc" rows="3" required class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white"></textarea>
+</div>
+<div class="pt-3 flex gap-2">
+<button type="button" onclick="closeMuralModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
+<button type="submit" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg cursor-pointer">Salvar Mural</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Lógica Supabase -->
+<script>
 
-            <div id="addMaterialBtnContainer" class="hidden w-full md:w-auto">
-                <button type="button" onclick="openUploadModal()" class="w-full md:w-auto bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center gap-2 border border-pink-400/30 cursor-pointer">
-                    <i class="fa-solid fa-plus"></i> Novo Material
-                </button>
-            </div>
-        </div>
+        const SUPABASE_URL = "https://jbtrcyjreufdbepjfiit.supabase.co";
 
-        <!-- Filtros Rápidos por Território -->
-        <div class="flex flex-wrap gap-2 mb-6">
-            <button type="button" id="btnTerritorio-TODOS" onclick="setTerritorio('TODOS')" class="territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer">Todos os Territórios</button>
-            <button type="button" id="btnTerritorio-Grande Rio" onclick="setTerritorio('Grande Rio')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Grande Rio</button>
-            <button type="button" id="btnTerritorio-Rio Litoral" onclick="setTerritorio('Rio Litoral')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Rio Litoral</button>
-            <button type="button" id="btnTerritorio-Rio Interior" onclick="setTerritorio('Rio Interior')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Rio Interior</button>
-            <button type="button" id="btnTerritorio-Espírito Santo" onclick="setTerritorio('Espírito Santo')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Espírito Santo</button>
-        </div>
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpidHJjeWpyZXVmZGJlcGpmaWl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQyOTksImV4cCI6MjEwNTkyMDI5OX0.wtnuHde-jKmLS8ZK8_XdihK7gvEXINL8hfIk2mL7f3M";
 
-        <!-- Grid de Materiais -->
-        <div id="materialsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Cards gerados dinamicamente -->
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-black/80 border-t border-pink-900/30 mt-8 py-5 text-center text-xs text-gray-500">
-        <p>Portal de Trade Marketing Leste • Vivo Regional Leste <span class="text-pink-500 font-bold">+L</span></p>
-    </footer>
-
-    <!-- MODAL: Subir / Editar Material -->
-    <div id="uploadModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-gray-950 rounded-2xl max-w-md w-full p-6 border border-pink-500/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button type="button" onclick="closeUploadModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            
-            <h3 id="modalFormTitle" class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-cloud-arrow-up text-pink-500"></i> Adicionar Novo Material
-            </h3>
-
-            <form id="uploadForm" onsubmit="handleUpload(event)" class="space-y-3">
-                <input type="hidden" id="editingId" value="">
-
-                <div>
-                    <label class="block text-xs font-bold text-pink-300 mb-1">Título do Material</label>
-                    <input type="text" id="matTitle" required placeholder="Ex: Lâmina Ofertas Fibra" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white focus:ring-2 focus:ring-pink-500">
-                </div>
-
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-xs font-bold text-pink-300 mb-1">Território</label>
-                        <select id="matTerritorio" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
-                            <option value="Geral">Geral (Leste)</option>
-                            <option value="Grande Rio">Grande Rio</option>
-                            <option value="Rio Litoral">Rio Litoral</option>
-                            <option value="Rio Interior">Rio Interior</option>
-                            <option value="Espírito Santo">Espírito Santo</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-pink-300 mb-1">Categoria</label>
-                        <select id="matCategory" class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
-                            <option value="Lâmina de ofertas">Lâmina de ofertas</option>
-                            <option value="Capacitação">Capacitação</option>
-                            <option value="Manuais de VM">Manuais de VM</option>
-                            <option value="Enxoval Território">Enxoval Território</option>
-                            <option value="Outros">Outros</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Seleção Múltipla de Canais de Venda -->
-                <div>
-                    <label class="block text-xs font-bold text-pink-300 mb-1.5">Canal de Venda (Selecione um ou mais)</label>
-                    <div class="bg-black/80 border border-pink-900/60 rounded-xl p-3 space-y-2">
-                        <label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
-                            <input type="checkbox" name="channelOption" value="Loja Própria" class="rounded accent-pink-600">
-                            <span>Loja Própria</span>
-                        </label>
-                        <label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
-                            <input type="checkbox" name="channelOption" value="Revenda" class="rounded accent-pink-600">
-                            <span>Revenda</span>
-                        </label>
-                        <label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
-                            <input type="checkbox" name="channelOption" value="PAP" class="rounded accent-pink-600">
-                            <span>PAP</span>
-                        </label>
-                        <label class="flex items-center space-x-2 text-xs text-gray-200 cursor-pointer hover:text-white">
-                            <input type="checkbox" name="channelOption" value="Distribuição" class="rounded accent-pink-600">
-                            <span>Distribuição</span>
-                        </label>
-                    </div>
-                    <p class="text-[10px] text-pink-300/70 mt-1">* Se nenhum canal for marcado, será considerado "Todos os Canais".</p>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-pink-300 mb-1">Anexar Arquivo ou Link</label>
-                    <input type="file" id="matFile" class="w-full border border-pink-900/60 rounded-xl p-2 text-xs text-gray-300 bg-black/50 mb-2">
-                    <input type="url" id="matFileUrl" placeholder="Ou cole um link do SharePoint/OneDrive (https://...)" class="w-full border border-pink-900/60 rounded-xl p-2 text-xs text-white bg-black/80">
-                </div>
-
-                <div class="pt-3 flex gap-2">
-                    <button type="button" onclick="closeUploadModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
-                    <button type="submit" id="saveMatBtn" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg cursor-pointer">Salvar Material</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL: Editar Mural -->
-    <div id="muralModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-gray-950 rounded-2xl max-w-md w-full p-6 border border-pink-500/40 shadow-2xl relative">
-            <button type="button" onclick="closeMuralModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            
-            <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-pen-to-square text-pink-500"></i> Editar Mural da Semana
-            </h3>
-
-            <form onsubmit="handleMuralSave(event)" class="space-y-3">
-                <div>
-                    <label class="block text-xs font-bold text-pink-300 mb-1">Subtítulo / Destaque</label>
-                    <input type="text" id="editMuralTitle" required class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-pink-300 mb-1">Aviso para a Força de Vendas</label>
-                    <textarea id="editMuralDesc" rows="3" required class="w-full bg-black/80 border border-pink-900/60 rounded-xl p-2.5 text-sm text-white"></textarea>
-                </div>
-
-                <div class="pt-3 flex gap-2">
-                    <button type="button" onclick="closeMuralModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
-                    <button type="submit" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg cursor-pointer">Salvar Mural</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Lógica Vanilla JS -->
-    <script>
-        const firebaseConfig = {
-  apiKey: "AIzaSyCOkCi5Nq_wO49mwgLwb1a77ZuUw-e4Log",
-  authDomain: "trade-leste-vivo23.firebaseapp.com",
-  projectId: "trade-leste-vivo23",
-  storageBucket: "trade-leste-vivo23.firebasestorage.app",
-  messagingSenderId: "53440980795",
-  appId: "1:53440980795:web:ba1f3f92619f0b59dc791e"
-};
-
-        let db = null;
-        let useFirebase = false;
+        let _supabase = null;
 
         try {
-            if (typeof firebase !== 'undefined' && firebaseConfig.apiKey && firebaseConfig.apiKey.startsWith('AIza')) {
-                firebase.initializeApp(firebaseConfig);
-                db = firebase.firestore();
-                useFirebase = true;
-            }
-        } catch (e) {
-            console.warn("Iniciando em modo local:", e);
+
+            _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        } catch(e) {
+
+            console.warn("Supabase não inicializado:", e);
+
         }
 
         let isAdmin = false;
-        let selectedTerritorio = 'TODOS';
-        
-        let materials = [
-            { id: '1', title: 'Lâmina de Ofertas Controle & Pós-Pago', category: 'Lâmina de ofertas', channel: 'Loja Própria, Revenda', territorio: 'Grande Rio', date: '23/09/2026', format: 'PDF', fileUrl: '#' },
-            { id: '2', title: 'Guia Visual Vitrine & MPDV Primavera', category: 'Manuais de VM', channel: 'Todos os Canais', territorio: 'Geral', date: '22/09/2026', format: 'PDF', fileUrl: '#' },
-            { id: '3', title: 'Enxoval de Comunicação Regional Leste', category: 'Enxoval Território', channel: 'Loja Própria, PAP', territorio: 'Espírito Santo', date: '21/09/2026', format: 'ZIP', fileUrl: '#' }
-        ];
 
-        // Função do Botão de Acesso ADM (Garantida)
+        let selectedTerritorio = 'TODOS';
+
+        let materials = [];
+
         window.toggleAdmin = function() {
+
             if (!isAdmin) {
+
                 const pass = prompt('Digite a senha de Administrador:');
+
                 if (pass === 'vivo123') {
+
                     isAdmin = true;
+
                     updateAdminUI();
+
                     alert('Modo Administrador Ativado!');
+
                 } else if (pass !== null) {
+
                     alert('Senha incorreta!');
+
                 }
+
             } else {
+
                 isAdmin = false;
+
                 updateAdminUI();
+
             }
+
             renderMaterials();
+
         };
 
         function updateAdminUI() {
+
             const adminBadge = document.getElementById('adminBadge');
+
             const addMaterialBtnContainer = document.getElementById('addMaterialBtnContainer');
+
             const admEditMuralBtn = document.getElementById('admEditMuralBtn');
+
             const adminBtnText = document.getElementById('adminBtnText');
 
             if (isAdmin) {
+
                 if (adminBadge) adminBadge.classList.remove('hidden');
+
                 if (addMaterialBtnContainer) addMaterialBtnContainer.classList.remove('hidden');
+
                 if (admEditMuralBtn) admEditMuralBtn.classList.remove('hidden');
+
                 if (adminBtnText) adminBtnText.innerText = 'Sair do Adm';
+
             } else {
+
                 if (adminBadge) adminBadge.classList.add('hidden');
+
                 if (addMaterialBtnContainer) addMaterialBtnContainer.classList.add('hidden');
+
                 if (admEditMuralBtn) admEditMuralBtn.classList.add('hidden');
+
                 if (adminBtnText) adminBtnText.innerText = 'Acesso Adm';
+
             }
+
         }
 
-        if (useFirebase && db) {
-            db.collection("materials").onSnapshot(snapshot => {
-                let remoteList = [];
-                snapshot.forEach(doc => {
-                    remoteList.push({ id: doc.id, ...doc.data() });
-                });
-                if (remoteList.length > 0) {
-                    materials = remoteList;
-                }
-                renderMaterials();
-            }, err => {
-                console.warn("Comunicação Firebase:", err);
-                renderMaterials();
-            });
+        async function fetchSupabaseData() {
 
-            db.collection("settings").doc("mural").onSnapshot(doc => {
-                if (doc.exists) {
-                    const data = doc.data();
-                    if (data.title) document.getElementById('muralTitle').innerText = data.title;
-                    if (data.desc) document.getElementById('muralDesc').innerText = data.desc;
-                }
-            }, err => console.warn("Erro ao obter Mural:", err));
+            if (!_supabase) return;
+
+            const { data: matsData } = await _supabase.from('materials').select('*').order('id', { ascending: false });
+
+            if (matsData) {
+
+                materials = matsData;
+
+                renderMaterials();
+
+            }
+
+            const { data: muralData } = await _supabase.from('settings').select('*').eq('id', 'mural').single();
+
+            if (muralData) {
+
+                document.getElementById('muralTitle').innerText = muralData.title || "Lançamento de Ofertas Semanal";
+
+                document.getElementById('muralDesc').innerText = muralData.desc || "Repositório unificado de materiais.";
+
+            }
+
         }
 
         function renderMaterials() {
+
             const grid = document.getElementById('materialsGrid');
+
             if (!grid) return;
 
             const searchInput = document.getElementById('searchInput');
+
             const search = searchInput ? searchInput.value.toLowerCase() : '';
 
             const filtered = materials.filter(m => {
+
                 const matchesSearch = (m.title || '').toLowerCase().includes(search) || 
+
                                       (m.category || '').toLowerCase().includes(search) || 
+
                                       (m.channel || '').toLowerCase().includes(search);
-                const itemTerritorio = m.territorio || m.uf || 'Geral';
-                const matchesTerritorio = selectedTerritorio === 'TODOS' || itemTerritorio === selectedTerritorio || itemTerritorio === 'Geral' || itemTerritorio === 'GERAL';
+
+                const itemTerritorio = m.territorio || 'Geral';
+
+                const matchesTerritorio = selectedTerritorio === 'TODOS' || itemTerritorio === selectedTerritorio || itemTerritorio === 'Geral';
+
                 return matchesSearch && matchesTerritorio;
+
             });
 
             if (filtered.length === 0) {
+
                 grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado no repositório.</div>`;
+
                 return;
+
             }
 
             grid.innerHTML = filtered.map(m => `
-                <div class="bg-black/60 rounded-2xl p-4 border border-pink-900/30 flex flex-col justify-between neon-card transition duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-pink-500/20 text-pink-300 border border-pink-500/40 uppercase tracking-wider">${m.category || 'Geral'}</span>
-                            <span class="text-xs font-bold text-gray-400 bg-gray-900/80 px-2 py-0.5 rounded-md">${m.territorio || m.uf || 'Geral'}</span>
-                        </div>
-                        <h3 class="font-bold text-white text-sm mb-1 line-clamp-2">${m.title || 'Sem título'}</h3>
-                        <p class="text-[11px] text-gray-400 mb-3">
-                            <i class="fa-regular fa-calendar-check mr-1 text-pink-400"></i>${m.date || ''} • <span class="text-pink-200/80">${m.channel || 'Todos os Canais'}</span>
-                        </p>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-gray-800/80 pt-3 mt-2">
-                        <a href="${m.fileUrl || '#'}" ${m.fileUrl && m.fileUrl !== '#' ? 'target="_blank"' : ''} download="${m.title || 'material'}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow cursor-pointer">
-                            <i class="fa-solid fa-download"></i> Baixar (${m.format || 'PDF'})
-                        </a>
+<div class="bg-black/60 rounded-2xl p-4 border border-pink-900/30 flex flex-col justify-between neon-card transition duration-300">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-pink-500/20 text-pink-300 border border-pink-500/40 uppercase tracking-wider">${m.category || 'Geral'}</span>
+<span class="text-xs font-bold text-gray-400 bg-gray-900/80 px-2 py-0.5 rounded-md">${m.territorio || 'Geral'}</span>
+</div>
+<h3 class="font-bold text-white text-sm mb-1 line-clamp-2">${m.title || 'Sem título'}</h3>
+<p class="text-[11px] text-gray-400 mb-3">
+<i class="fa-regular fa-calendar-check mr-1 text-pink-400"></i>${m.date || ''} • <span class="text-pink-200/80">${m.channel || 'Todos os Canais'}</span>
+</p>
+</div>
+<div class="flex items-center justify-between border-t border-gray-800/80 pt-3 mt-2">
+<a href="${m.fileurl || m.fileUrl || '#'}" target="_blank" download="${m.title}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow cursor-pointer">
+<i class="fa-solid fa-download"></i> Baixar (${m.format || 'PDF'})
+</a>
+
                         ${isAdmin ? `
-                            <div class="flex items-center gap-2">
-                                <button type="button" onclick="openEditModal('${m.id}')" class="text-pink-400 hover:text-pink-300 text-xs font-bold p-1 cursor-pointer" title="Editar"><i class="fa-solid fa-pen"></i></button>
-                                <button type="button" onclick="deleteMaterial('${m.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold p-1 cursor-pointer" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
-                            </div>
+<div class="flex items-center gap-2">
+<button type="button" onclick="openEditModal('${m.id}')" class="text-pink-400 hover:text-pink-300 text-xs font-bold p-1 cursor-pointer" title="Editar"><i class="fa-solid fa-pen"></i></button>
+<button type="button" onclick="deleteMaterial('${m.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold p-1 cursor-pointer" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
+</div>
+
                         ` : ''}
-                    </div>
-                </div>
+</div>
+</div>
+
             `).join('');
+
         }
 
         window.setTerritorio = function(ter) {
+
             selectedTerritorio = ter;
+
             const territorios = ['TODOS', 'Grande Rio', 'Rio Litoral', 'Rio Interior', 'Espírito Santo'];
+
             territorios.forEach(t => {
+
                 const btn = document.getElementById(`btnTerritorio-${t}`);
+
                 if (btn) {
+
                     if (t === ter) {
+
                         btn.className = "territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer";
+
                     } else {
+
                         btn.className = "territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer";
+
                     }
+
                 }
+
             });
+
             renderMaterials();
+
         };
 
         function getSelectedChannels() {
+
             const checkboxes = document.querySelectorAll('input[name="channelOption"]:checked');
+
             const selected = Array.from(checkboxes).map(cb => cb.value);
+
             if (selected.length === 0 || selected.length === 4) {
+
                 return 'Todos os Canais';
+
             }
+
             return selected.join(', ');
+
         }
 
         function setSelectedChannels(channelString) {
+
             const checkboxes = document.querySelectorAll('input[name="channelOption"]');
+
             checkboxes.forEach(cb => {
+
                 if (!channelString || channelString === 'Todos os Canais') {
+
                     cb.checked = false;
+
                 } else {
+
                     cb.checked = channelString.includes(cb.value);
+
                 }
+
             });
+
         }
 
         window.openUploadModal = function() {
+
             document.getElementById('editingId').value = '';
+
             document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-pink-500"></i> Adicionar Novo Material`;
+
             document.getElementById('uploadForm').reset();
+
             setSelectedChannels('Todos os Canais');
+
             document.getElementById('uploadModal').classList.remove('hidden');
+
         };
 
         window.openEditModal = function(id) {
+
             const mat = materials.find(m => String(m.id) === String(id));
+
             if (!mat) return;
 
             document.getElementById('editingId').value = mat.id;
+
             document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-pen text-pink-500"></i> Editar Material`;
+
             document.getElementById('matTitle').value = mat.title || '';
-            document.getElementById('matTerritorio').value = mat.territorio || mat.uf || 'Geral';
+
+            document.getElementById('matTerritorio').value = mat.territorio || 'Geral';
+
             document.getElementById('matCategory').value = mat.category || 'Outros';
-            document.getElementById('matFileUrl').value = mat.fileUrl || '';
+
+            document.getElementById('matFileUrl').value = mat.fileurl || mat.fileUrl || '';
+
             setSelectedChannels(mat.channel || '');
 
             document.getElementById('uploadModal').classList.remove('hidden');
+
         };
 
         window.closeUploadModal = function() {
+
             document.getElementById('uploadModal').classList.add('hidden');
+
         };
 
-        window.handleUpload = function(e) {
+        window.handleUpload = async function(e) {
+
             e.preventDefault();
 
             const editingId = document.getElementById('editingId').value;
+
             const title = document.getElementById('matTitle').value;
+
             const territorio = document.getElementById('matTerritorio').value;
+
             const category = document.getElementById('matCategory').value;
+
             const channel = getSelectedChannels();
-            const fileInput = document.getElementById('matFile');
-            const fileUrlInput = document.getElementById('matFileUrl').value;
 
-            let fileUrl = fileUrlInput || '#';
-            let format = 'PDF';
-
-            if (fileInput && fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                format = file.name.split('.').pop().toUpperCase();
-                fileUrl = URL.createObjectURL(file);
-            }
+            const fileUrl = document.getElementById('matFileUrl').value;
 
             const today = new Date();
+
             const dateStr = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
 
             const payload = {
+
                 title,
+
                 territorio,
+
                 category,
+
                 channel,
-                fileUrl,
-                format,
-                date: dateStr,
-                createdAt: Date.now()
+
+                fileurl: fileUrl,
+
+                format: 'PDF',
+
+                date: dateStr
+
             };
 
-            if (useFirebase && db) {
+            if (_supabase) {
+
                 if (editingId) {
-                    db.collection("materials").doc(editingId).update(payload)
-                        .then(() => closeUploadModal())
-                        .catch(err => alert("Erro ao atualizar: " + err.message));
+
+                    await _supabase.from('materials').update(payload).eq('id', editingId);
+
                 } else {
-                    db.collection("materials").add(payload)
-                        .then(() => closeUploadModal())
-                        .catch(err => alert("Erro ao salvar: " + err.message));
+
+                    await _supabase.from('materials').insert([payload]);
+
                 }
-            } else {
-                if (editingId) {
-                    const mat = materials.find(m => String(m.id) === String(editingId));
-                    if (mat) Object.assign(mat, payload);
-                } else {
-                    materials.unshift({ id: String(Date.now()), ...payload });
-                }
-                renderMaterials();
-                closeUploadModal();
+
+                await fetchSupabaseData();
+
             }
+
+            closeUploadModal();
+
         };
 
         window.openMuralModal = function() {
+
             document.getElementById('editMuralTitle').value = document.getElementById('muralTitle').innerText;
+
             document.getElementById('editMuralDesc').value = document.getElementById('muralDesc').innerText;
+
             document.getElementById('muralModal').classList.remove('hidden');
+
         };
 
         window.closeMuralModal = function() {
+
             document.getElementById('muralModal').classList.add('hidden');
+
         };
 
-        window.handleMuralSave = function(e) {
+        window.handleMuralSave = async function(e) {
+
             e.preventDefault();
+
             const title = document.getElementById('editMuralTitle').value;
+
             const desc = document.getElementById('editMuralDesc').value;
 
             document.getElementById('muralTitle').innerText = title;
+
             document.getElementById('muralDesc').innerText = desc;
 
-            if (useFirebase && db) {
-                db.collection("settings").doc("mural").set({ title, desc })
-                    .then(() => closeMuralModal())
-                    .catch(err => alert("Erro ao salvar mural: " + err.message));
-            } else {
-                closeMuralModal();
+            if (_supabase) {
+
+                await _supabase.from('settings').upsert({ id: 'mural', title, desc });
+
             }
+
+            closeMuralModal();
+
         };
 
-        window.deleteMaterial = function(id) {
+        window.deleteMaterial = async function(id) {
+
             if (confirm('Deseja realmente excluir este material permanentemente?')) {
-                if (useFirebase && db) {
-                    db.collection("materials").doc(id).delete()
-                        .catch(err => alert("Erro ao excluir: " + err.message));
-                } else {
-                    materials = materials.filter(m => String(m.id) !== String(id));
-                    renderMaterials();
+
+                if (_supabase) {
+
+                    await _supabase.from('materials').delete().eq('id', id);
+
+                    await fetchSupabaseData();
+
                 }
+
             }
+
         };
 
-        // Renderização inicial
+        // Inicialização
+
+        fetchSupabaseData();
+
         renderMaterials();
-    </script>
+</script>
 </body>
 </html>
+ 
