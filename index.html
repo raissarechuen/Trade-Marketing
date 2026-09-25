@@ -9,40 +9,23 @@
 <!-- Supabase JS Client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-
-        body {
-
-            background-color: #07030d;
-
-            background-image: 
-
-                radial-gradient(circle at 50% 0%, rgba(226, 0, 116, 0.25) 0%, transparent 60%),
-
-                radial-gradient(circle at 100% 100%, rgba(102, 0, 153, 0.2) 0%, transparent 50%);
-
-        }
-
-        .neon-border {
-
-            box-shadow: 0 0 15px rgba(226, 0, 116, 0.4), inset 0 0 10px rgba(226, 0, 116, 0.2);
-
-            border: 1px solid rgba(226, 0, 116, 0.6);
-
-        }
-
-        .neon-card:hover {
-
-            box-shadow: 0 0 20px rgba(226, 0, 116, 0.5), 0 0 10px rgba(102, 0, 153, 0.5);
-
-            border-color: rgba(226, 0, 116, 0.8);
-
-        }
-
-        .math-bg {
-
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' fill='rgba(255,255,255,0.03)' font-size='12' font-family='monospace'%3Ee%5Ei%CF%80%2B1%3D0%3C/text%3E%3Ctext x='50' y='70' fill='rgba(255,255,255,0.03)' font-size='12' font-family='monospace'%3E%E2%88%91x%5En%3C/text%3E%3C/svg%3E");
-
-        }
+       body {
+           background-color: #07030d;
+           background-image:
+               radial-gradient(circle at 50% 0%, rgba(226, 0, 116, 0.25) 0%, transparent 60%),
+               radial-gradient(circle at 100% 100%, rgba(102, 0, 153, 0.2) 0%, transparent 50%);
+       }
+       .neon-border {
+           box-shadow: 0 0 15px rgba(226, 0, 116, 0.4), inset 0 0 10px rgba(226, 0, 116, 0.2);
+           border: 1px solid rgba(226, 0, 116, 0.6);
+       }
+       .neon-card:hover {
+           box-shadow: 0 0 20px rgba(226, 0, 116, 0.5), 0 0 10px rgba(102, 0, 153, 0.5);
+           border-color: rgba(226, 0, 116, 0.8);
+       }
+       .math-bg {
+           background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' fill='rgba(255,255,255,0.03)' font-size='12' font-family='monospace'%3Ee%5Ei%CF%80%2B1%3D0%3C/text%3E%3Ctext x='50' y='70' fill='rgba(255,255,255,0.03)' font-size='12' font-family='monospace'%3E%E2%88%91x%5En%3C/text%3E%3C/svg%3E");
+       }
 </style>
 </head>
 <body class="font-sans text-gray-100 min-h-screen flex flex-col math-bg">
@@ -51,8 +34,7 @@
 <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
 <div class="flex items-center space-x-3">
 <div class="bg-white text-black font-extrabold text-xl px-2.5 py-0.5 rounded-md tracking-wider">
-
-                    vivo
+                   vivo
 </div>
 <div>
 <div class="flex items-center gap-2">
@@ -82,13 +64,11 @@
 <i class="fa-solid fa-bolt text-pink-400"></i> Regional Leste
 </div>
 <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-pink-200 to-pink-400 tracking-wider uppercase mb-2">
-
-                        A MATEMÁTICA NÃO EXPLICA A LESTE
+                       A MATEMÁTICA NÃO EXPLICA A LESTE
 </h2>
 <h3 id="muralTitle" class="text-lg font-bold text-pink-300 mt-1">Lançamento de Ofertas Semanal</h3>
 <p id="muralDesc" class="text-xs md:text-sm text-gray-300 mt-1.5 leading-relaxed max-w-4xl">
-
-                        Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas da Regional Leste.
+                       Repositório unificado de materiais. Baixe lâminas de ofertas, guias de capacitação, manuais de VM e acervos das campanhas da Regional Leste.
 </p>
 </div>
 </div>
@@ -105,9 +85,8 @@
 <div class="flex flex-col md:flex-row justify-between items-center gap-3 mb-6">
 <div class="relative w-full md:w-96">
 <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-<input type="text" id="searchInput" oninput="renderMaterials()" placeholder="Buscar material, oferta, VM, canal..." 
-
-                    class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-pink-900/50 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-black/60 text-white placeholder-gray-500 shadow-inner">
+<input type="text" id="searchInput" oninput="renderMaterials()" placeholder="Buscar material, oferta, VM, canal..."
+                   class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-pink-900/50 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-black/60 text-white placeholder-gray-500 shadow-inner">
 </div>
 <div id="addMaterialBtnContainer" class="hidden w-full md:w-auto">
 <button type="button" onclick="openUploadModal()" class="w-full md:w-auto bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center gap-2 border border-pink-400/30 cursor-pointer">
@@ -193,8 +172,10 @@
 <p class="text-[10px] text-pink-300/70 mt-1">* Se nenhum canal for marcado, será considerado "Todos os Canais".</p>
 </div>
 <div>
-<label class="block text-xs font-bold text-pink-300 mb-1">Link/URL do Arquivo (SharePoint/OneDrive)</label>
-<input type="url" id="matFileUrl" required placeholder="https://..." class="w-full border border-pink-900/60 rounded-xl p-2.5 text-xs text-white bg-black/80">
+<label class="block text-xs font-bold text-pink-300 mb-1">Anexar Arquivo Local (PDF/ZIP/Imagem)</label>
+<input type="file" id="matFile" class="w-full border border-pink-900/60 rounded-xl p-2 text-xs text-gray-300 bg-black/50 mb-2">
+<label class="block text-xs font-bold text-pink-300 mb-1">Ou cole o Link do SharePoint / OneDrive</label>
+<input type="url" id="matFileUrl" placeholder="https://..." class="w-full border border-pink-900/60 rounded-xl p-2.5 text-xs text-white bg-black/80">
 </div>
 <div class="pt-3 flex gap-2">
 <button type="button" onclick="closeUploadModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
@@ -228,158 +209,83 @@
 </form>
 </div>
 </div>
-<!-- Lógica Supabase -->
+<!-- Lógica Supabase Integrada -->
 <script>
-
-        const SUPABASE_URL = "https://jbtrcyjreufdbepjfiit.supabase.co";
-
-        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpidHJjeWpyZXVmZGJlcGpmaWl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQyOTksImV4cCI6MjEwNTkyMDI5OX0.wtnuHde-jKmLS8ZK8_XdihK7gvEXINL8hfIk2mL7f3M";
-
-        let _supabase = null;
-
-        try {
-
-            _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        } catch(e) {
-
-            console.warn("Supabase não inicializado:", e);
-
-        }
-
-        let isAdmin = false;
-
-        let selectedTerritorio = 'TODOS';
-
-        let materials = [];
-
-        window.toggleAdmin = function() {
-
-            if (!isAdmin) {
-
-                const pass = prompt('Digite a senha de Administrador:');
-
-                if (pass === 'vivo123') {
-
-                    isAdmin = true;
-
-                    updateAdminUI();
-
-                    alert('Modo Administrador Ativado!');
-
-                } else if (pass !== null) {
-
-                    alert('Senha incorreta!');
-
-                }
-
-            } else {
-
-                isAdmin = false;
-
-                updateAdminUI();
-
-            }
-
-            renderMaterials();
-
-        };
-
-        function updateAdminUI() {
-
-            const adminBadge = document.getElementById('adminBadge');
-
-            const addMaterialBtnContainer = document.getElementById('addMaterialBtnContainer');
-
-            const admEditMuralBtn = document.getElementById('admEditMuralBtn');
-
-            const adminBtnText = document.getElementById('adminBtnText');
-
-            if (isAdmin) {
-
-                if (adminBadge) adminBadge.classList.remove('hidden');
-
-                if (addMaterialBtnContainer) addMaterialBtnContainer.classList.remove('hidden');
-
-                if (admEditMuralBtn) admEditMuralBtn.classList.remove('hidden');
-
-                if (adminBtnText) adminBtnText.innerText = 'Sair do Adm';
-
-            } else {
-
-                if (adminBadge) adminBadge.classList.add('hidden');
-
-                if (addMaterialBtnContainer) addMaterialBtnContainer.classList.add('hidden');
-
-                if (admEditMuralBtn) admEditMuralBtn.classList.add('hidden');
-
-                if (adminBtnText) adminBtnText.innerText = 'Acesso Adm';
-
-            }
-
-        }
-
-        async function fetchSupabaseData() {
-
-            if (!_supabase) return;
-
-            const { data: matsData } = await _supabase.from('materials').select('*').order('id', { ascending: false });
-
-            if (matsData) {
-
-                materials = matsData;
-
-                renderMaterials();
-
-            }
-
-            const { data: muralData } = await _supabase.from('settings').select('*').eq('id', 'mural').single();
-
-            if (muralData) {
-
-                document.getElementById('muralTitle').innerText = muralData.title || "Lançamento de Ofertas Semanal";
-
-                document.getElementById('muralDesc').innerText = muralData.desc || "Repositório unificado de materiais.";
-
-            }
-
-        }
-
-        function renderMaterials() {
-
-            const grid = document.getElementById('materialsGrid');
-
-            if (!grid) return;
-
-            const searchInput = document.getElementById('searchInput');
-
-            const search = searchInput ? searchInput.value.toLowerCase() : '';
-
-            const filtered = materials.filter(m => {
-
-                const matchesSearch = (m.title || '').toLowerCase().includes(search) || 
-
-                                      (m.category || '').toLowerCase().includes(search) || 
-
-                                      (m.channel || '').toLowerCase().includes(search);
-
-                const itemTerritorio = m.territorio || 'Geral';
-
-                const matchesTerritorio = selectedTerritorio === 'TODOS' || itemTerritorio === selectedTerritorio || itemTerritorio === 'Geral';
-
-                return matchesSearch && matchesTerritorio;
-
-            });
-
-            if (filtered.length === 0) {
-
-                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado no repositório.</div>`;
-
-                return;
-
-            }
-
-            grid.innerHTML = filtered.map(m => `
+       const SUPABASE_URL = "https://jbtrcyjreufdbepjfiit.supabase.co";
+       const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpidHJjeWpyZXVmZGJlcGpmaWl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQyOTksImV4cCI6MjEwNTkyMDI5OX0.wtnuHde-jKmLS8ZK8_XdihK7gvEXINL8hfIk2mL7f3M";
+       let _supabase = null;
+       try {
+           _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+       } catch(e) {
+           console.warn("Supabase não inicializado:", e);
+       }
+       let isAdmin = false;
+       let selectedTerritorio = 'TODOS';
+       let materials = [];
+       window.toggleAdmin = function() {
+           if (!isAdmin) {
+               const pass = prompt('Digite a senha de Administrador:');
+               if (pass === 'vivo123') {
+                   isAdmin = true;
+                   updateAdminUI();
+                   alert('Modo Administrador Ativado!');
+               } else if (pass !== null) {
+                   alert('Senha incorreta!');
+               }
+           } else {
+               isAdmin = false;
+               updateAdminUI();
+           }
+           renderMaterials();
+       };
+       function updateAdminUI() {
+           const adminBadge = document.getElementById('adminBadge');
+           const addMaterialBtnContainer = document.getElementById('addMaterialBtnContainer');
+           const admEditMuralBtn = document.getElementById('admEditMuralBtn');
+           const adminBtnText = document.getElementById('adminBtnText');
+           if (isAdmin) {
+               if (adminBadge) adminBadge.classList.remove('hidden');
+               if (addMaterialBtnContainer) addMaterialBtnContainer.classList.remove('hidden');
+               if (admEditMuralBtn) admEditMuralBtn.classList.remove('hidden');
+               if (adminBtnText) adminBtnText.innerText = 'Sair do Adm';
+           } else {
+               if (adminBadge) adminBadge.classList.add('hidden');
+               if (addMaterialBtnContainer) addMaterialBtnContainer.classList.add('hidden');
+               if (admEditMuralBtn) admEditMuralBtn.classList.add('hidden');
+               if (adminBtnText) adminBtnText.innerText = 'Acesso Adm';
+           }
+       }
+       async function fetchSupabaseData() {
+           if (!_supabase) return;
+           const { data: matsData } = await _supabase.from('materials').select('*').order('id', { ascending: false });
+           if (matsData) {
+               materials = matsData;
+               renderMaterials();
+           }
+           const { data: muralData } = await _supabase.from('settings').select('*').eq('id', 'mural').single();
+           if (muralData) {
+               document.getElementById('muralTitle').innerText = muralData.title || "Lançamento de Ofertas Semanal";
+               document.getElementById('muralDesc').innerText = muralData.desc || "Repositório unificado de materiais.";
+           }
+       }
+       function renderMaterials() {
+           const grid = document.getElementById('materialsGrid');
+           if (!grid) return;
+           const searchInput = document.getElementById('searchInput');
+           const search = searchInput ? searchInput.value.toLowerCase() : '';
+           const filtered = materials.filter(m => {
+               const matchesSearch = (m.title || '').toLowerCase().includes(search) ||
+                                     (m.category || '').toLowerCase().includes(search) ||
+                                     (m.channel || '').toLowerCase().includes(search);
+               const itemTerritorio = m.territorio || 'Geral';
+               const matchesTerritorio = selectedTerritorio === 'TODOS' || itemTerritorio === selectedTerritorio || itemTerritorio === 'Geral';
+               return matchesSearch && matchesTerritorio;
+           });
+           if (filtered.length === 0) {
+               grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado no repositório.</div>`;
+               return;
+           }
+           grid.innerHTML = filtered.map(m => `
 <div class="bg-black/60 rounded-2xl p-4 border border-pink-900/30 flex flex-col justify-between neon-card transition duration-300">
 <div>
 <div class="flex justify-between items-start mb-2">
@@ -395,249 +301,153 @@
 <a href="${m.fileurl || m.fileUrl || '#'}" target="_blank" download="${m.title}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow cursor-pointer">
 <i class="fa-solid fa-download"></i> Baixar (${m.format || 'PDF'})
 </a>
-
-                        ${isAdmin ? `
+                       ${isAdmin ? `
 <div class="flex items-center gap-2">
 <button type="button" onclick="openEditModal('${m.id}')" class="text-pink-400 hover:text-pink-300 text-xs font-bold p-1 cursor-pointer" title="Editar"><i class="fa-solid fa-pen"></i></button>
 <button type="button" onclick="deleteMaterial('${m.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold p-1 cursor-pointer" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
 </div>
-
-                        ` : ''}
+                       ` : ''}
 </div>
 </div>
-
-            `).join('');
-
-        }
-
-        window.setTerritorio = function(ter) {
-
-            selectedTerritorio = ter;
-
-            const territorios = ['TODOS', 'Grande Rio', 'Rio Litoral', 'Rio Interior', 'Espírito Santo'];
-
-            territorios.forEach(t => {
-
-                const btn = document.getElementById(`btnTerritorio-${t}`);
-
-                if (btn) {
-
-                    if (t === ter) {
-
-                        btn.className = "territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer";
-
-                    } else {
-
-                        btn.className = "territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer";
-
-                    }
-
-                }
-
-            });
-
-            renderMaterials();
-
-        };
-
-        function getSelectedChannels() {
-
-            const checkboxes = document.querySelectorAll('input[name="channelOption"]:checked');
-
-            const selected = Array.from(checkboxes).map(cb => cb.value);
-
-            if (selected.length === 0 || selected.length === 4) {
-
-                return 'Todos os Canais';
-
-            }
-
-            return selected.join(', ');
-
-        }
-
-        function setSelectedChannels(channelString) {
-
-            const checkboxes = document.querySelectorAll('input[name="channelOption"]');
-
-            checkboxes.forEach(cb => {
-
-                if (!channelString || channelString === 'Todos os Canais') {
-
-                    cb.checked = false;
-
-                } else {
-
-                    cb.checked = channelString.includes(cb.value);
-
-                }
-
-            });
-
-        }
-
-        window.openUploadModal = function() {
-
-            document.getElementById('editingId').value = '';
-
-            document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-pink-500"></i> Adicionar Novo Material`;
-
-            document.getElementById('uploadForm').reset();
-
-            setSelectedChannels('Todos os Canais');
-
-            document.getElementById('uploadModal').classList.remove('hidden');
-
-        };
-
-        window.openEditModal = function(id) {
-
-            const mat = materials.find(m => String(m.id) === String(id));
-
-            if (!mat) return;
-
-            document.getElementById('editingId').value = mat.id;
-
-            document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-pen text-pink-500"></i> Editar Material`;
-
-            document.getElementById('matTitle').value = mat.title || '';
-
-            document.getElementById('matTerritorio').value = mat.territorio || 'Geral';
-
-            document.getElementById('matCategory').value = mat.category || 'Outros';
-
-            document.getElementById('matFileUrl').value = mat.fileurl || mat.fileUrl || '';
-
-            setSelectedChannels(mat.channel || '');
-
-            document.getElementById('uploadModal').classList.remove('hidden');
-
-        };
-
-        window.closeUploadModal = function() {
-
-            document.getElementById('uploadModal').classList.add('hidden');
-
-        };
-
-        window.handleUpload = async function(e) {
-
-            e.preventDefault();
-
-            const editingId = document.getElementById('editingId').value;
-
-            const title = document.getElementById('matTitle').value;
-
-            const territorio = document.getElementById('matTerritorio').value;
-
-            const category = document.getElementById('matCategory').value;
-
-            const channel = getSelectedChannels();
-
-            const fileUrl = document.getElementById('matFileUrl').value;
-
-            const today = new Date();
-
-            const dateStr = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
-
-            const payload = {
-
-                title,
-
-                territorio,
-
-                category,
-
-                channel,
-
-                fileurl: fileUrl,
-
-                format: 'PDF',
-
-                date: dateStr
-
-            };
-
-            if (_supabase) {
-
-                if (editingId) {
-
-                    await _supabase.from('materials').update(payload).eq('id', editingId);
-
-                } else {
-
-                    await _supabase.from('materials').insert([payload]);
-
-                }
-
-                await fetchSupabaseData();
-
-            }
-
-            closeUploadModal();
-
-        };
-
-        window.openMuralModal = function() {
-
-            document.getElementById('editMuralTitle').value = document.getElementById('muralTitle').innerText;
-
-            document.getElementById('editMuralDesc').value = document.getElementById('muralDesc').innerText;
-
-            document.getElementById('muralModal').classList.remove('hidden');
-
-        };
-
-        window.closeMuralModal = function() {
-
-            document.getElementById('muralModal').classList.add('hidden');
-
-        };
-
-        window.handleMuralSave = async function(e) {
-
-            e.preventDefault();
-
-            const title = document.getElementById('editMuralTitle').value;
-
-            const desc = document.getElementById('editMuralDesc').value;
-
-            document.getElementById('muralTitle').innerText = title;
-
-            document.getElementById('muralDesc').innerText = desc;
-
-            if (_supabase) {
-
-                await _supabase.from('settings').upsert({ id: 'mural', title, desc });
-
-            }
-
-            closeMuralModal();
-
-        };
-
-        window.deleteMaterial = async function(id) {
-
-            if (confirm('Deseja realmente excluir este material permanentemente?')) {
-
-                if (_supabase) {
-
-                    await _supabase.from('materials').delete().eq('id', id);
-
-                    await fetchSupabaseData();
-
-                }
-
-            }
-
-        };
-
-        // Inicialização
-
-        fetchSupabaseData();
-
-        renderMaterials();
+           `).join('');
+       }
+       window.setTerritorio = function(ter) {
+           selectedTerritorio = ter;
+           const territorios = ['TODOS', 'Grande Rio', 'Rio Litoral', 'Rio Interior', 'Espírito Santo'];
+           territorios.forEach(t => {
+               const btn = document.getElementById(`btnTerritorio-${t}`);
+               if (btn) {
+                   if (t === ter) {
+                       btn.className = "territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer";
+                   } else {
+                       btn.className = "territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer";
+                   }
+               }
+           });
+           renderMaterials();
+       };
+       function getSelectedChannels() {
+           const checkboxes = document.querySelectorAll('input[name="channelOption"]:checked');
+           const selected = Array.from(checkboxes).map(cb => cb.value);
+           if (selected.length === 0 || selected.length === 4) {
+               return 'Todos os Canais';
+           }
+           return selected.join(', ');
+       }
+       function setSelectedChannels(channelString) {
+           const checkboxes = document.querySelectorAll('input[name="channelOption"]');
+           checkboxes.forEach(cb => {
+               if (!channelString || channelString === 'Todos os Canais') {
+                   cb.checked = false;
+               } else {
+                   cb.checked = channelString.includes(cb.value);
+               }
+           });
+       }
+       window.openUploadModal = function() {
+           document.getElementById('editingId').value = '';
+           document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-pink-500"></i> Adicionar Novo Material`;
+           document.getElementById('uploadForm').reset();
+           setSelectedChannels('Todos os Canais');
+           document.getElementById('uploadModal').classList.remove('hidden');
+       };
+       window.openEditModal = function(id) {
+           const mat = materials.find(m => String(m.id) === String(id));
+           if (!mat) return;
+           document.getElementById('editingId').value = mat.id;
+           document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-pen text-pink-500"></i> Editar Material`;
+           document.getElementById('matTitle').value = mat.title || '';
+           document.getElementById('matTerritorio').value = mat.territorio || 'Geral';
+           document.getElementById('matCategory').value = mat.category || 'Outros';
+           document.getElementById('matFileUrl').value = mat.fileurl || mat.fileUrl || '';
+           setSelectedChannels(mat.channel || '');
+           document.getElementById('uploadModal').classList.remove('hidden');
+       };
+       window.closeUploadModal = function() {
+           document.getElementById('uploadModal').classList.add('hidden');
+       };
+       window.handleUpload = async function(e) {
+           e.preventDefault();
+           const saveBtn = document.getElementById('saveMatBtn');
+           saveBtn.innerText = "Enviando...";
+           saveBtn.disabled = true;
+           const editingId = document.getElementById('editingId').value;
+           const title = document.getElementById('matTitle').value;
+           const territorio = document.getElementById('matTerritorio').value;
+           const category = document.getElementById('matCategory').value;
+           const channel = getSelectedChannels();
+           const fileInput = document.getElementById('matFile');
+           const fileUrlInput = document.getElementById('matFileUrl').value;
+           let fileUrl = fileUrlInput || '#';
+           let format = 'PDF';
+           // Upload de arquivo local para o Supabase Storage se um arquivo for selecionado
+           if (fileInput && fileInput.files.length > 0) {
+               const file = fileInput.files[0];
+               format = file.name.split('.').pop().toUpperCase();
+               const filePath = `${Date.now()}_${file.name}`;
+               if (_supabase) {
+                   const { data: uploadData, error: uploadError } = await _supabase.storage.from('materiais').upload(filePath, file);
+                   if (uploadError) {
+                       alert("Aviso no envio do arquivo: " + uploadError.message + ". Tentando link alternativo...");
+                   } else {
+                       const { data: publicUrlData } = _supabase.storage.from('materiais').getPublicUrl(filePath);
+                       if (publicUrlData) fileUrl = publicUrlData.publicUrl;
+                   }
+               }
+           }
+           const today = new Date();
+           const dateStr = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+           const payload = {
+               title,
+               territorio,
+               category,
+               channel,
+               fileurl: fileUrl,
+               format,
+               date: dateStr
+           };
+           if (_supabase) {
+               if (editingId) {
+                   await _supabase.from('materials').update(payload).eq('id', editingId);
+               } else {
+                   await _supabase.from('materials').insert([payload]);
+               }
+               await fetchSupabaseData();
+           }
+           saveBtn.innerText = "Salvar Material";
+           saveBtn.disabled = false;
+           closeUploadModal();
+       };
+       window.openMuralModal = function() {
+           document.getElementById('editMuralTitle').value = document.getElementById('muralTitle').innerText;
+           document.getElementById('editMuralDesc').value = document.getElementById('muralDesc').innerText;
+           document.getElementById('muralModal').classList.remove('hidden');
+       };
+       window.closeMuralModal = function() {
+           document.getElementById('muralModal').classList.add('hidden');
+       };
+       window.handleMuralSave = async function(e) {
+           e.preventDefault();
+           const title = document.getElementById('editMuralTitle').value;
+           const desc = document.getElementById('editMuralDesc').value;
+           document.getElementById('muralTitle').innerText = title;
+           document.getElementById('muralDesc').innerText = desc;
+           if (_supabase) {
+               await _supabase.from('settings').upsert({ id: 'mural', title, desc });
+           }
+           closeMuralModal();
+       };
+       window.deleteMaterial = async function(id) {
+           if (confirm('Deseja realmente excluir este material permanentemente?')) {
+               if (_supabase) {
+                   await _supabase.from('materials').delete().eq('id', id);
+                   await fetchSupabaseData();
+               }
+           }
+       };
+       // Inicialização
+       fetchSupabaseData();
+       renderMaterials();
 </script>
 </body>
 </html>
- 
