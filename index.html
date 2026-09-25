@@ -53,7 +53,7 @@
                 <span id="adminBadge" class="hidden bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-xs font-extrabold px-2.5 py-0.5 rounded-full shadow-lg">
                     <i class="fa-solid fa-user-shield"></i> ADM
                 </span>
-                <button id="adminBtn" onclick="toggleAdmin()" class="bg-purple-950/80 hover:bg-purple-900 text-xs text-pink-200 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 border border-pink-500/30">
+                <button id="adminBtn" type="button" onclick="toggleAdmin()" class="bg-purple-950/80 hover:bg-purple-900 text-xs text-pink-200 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 border border-pink-500/30 cursor-pointer">
                     <i class="fa-solid fa-lock" id="adminIcon"></i>
                     <span id="adminBtnText">Acesso Adm</span>
                 </button>
@@ -80,7 +80,7 @@
             </div>
 
             <div id="admEditMuralBtn" class="hidden mt-4 pt-4 border-t border-pink-900/40 flex justify-end">
-                <button onclick="openMuralModal()" class="bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold px-3 py-2 rounded-xl shadow flex items-center gap-1.5 transition">
+                <button type="button" onclick="openMuralModal()" class="bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold px-3 py-2 rounded-xl shadow flex items-center gap-1.5 transition cursor-pointer">
                     <i class="fa-solid fa-pen"></i> Editar Mural
                 </button>
             </div>
@@ -99,7 +99,7 @@
             </div>
 
             <div id="addMaterialBtnContainer" class="hidden w-full md:w-auto">
-                <button onclick="openUploadModal()" class="w-full md:w-auto bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center gap-2 border border-pink-400/30">
+                <button type="button" onclick="openUploadModal()" class="w-full md:w-auto bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center gap-2 border border-pink-400/30 cursor-pointer">
                     <i class="fa-solid fa-plus"></i> Novo Material
                 </button>
             </div>
@@ -107,11 +107,11 @@
 
         <!-- Filtros Rápidos por Território -->
         <div class="flex flex-wrap gap-2 mb-6">
-            <button id="btnTerritorio-TODOS" onclick="setTerritorio('TODOS')" class="territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md">Todos os Territórios</button>
-            <button id="btnTerritorio-Grande Rio" onclick="setTerritorio('Grande Rio')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Grande Rio</button>
-            <button id="btnTerritorio-Rio Litoral" onclick="setTerritorio('Rio Litoral')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Rio Litoral</button>
-            <button id="btnTerritorio-Rio Interior" onclick="setTerritorio('Rio Interior')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Rio Interior</button>
-            <button id="btnTerritorio-Espírito Santo" onclick="setTerritorio('Espírito Santo')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition">Espírito Santo</button>
+            <button type="button" id="btnTerritorio-TODOS" onclick="setTerritorio('TODOS')" class="territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer">Todos os Territórios</button>
+            <button type="button" id="btnTerritorio-Grande Rio" onclick="setTerritorio('Grande Rio')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Grande Rio</button>
+            <button type="button" id="btnTerritorio-Rio Litoral" onclick="setTerritorio('Rio Litoral')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Rio Litoral</button>
+            <button type="button" id="btnTerritorio-Rio Interior" onclick="setTerritorio('Rio Interior')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Rio Interior</button>
+            <button type="button" id="btnTerritorio-Espírito Santo" onclick="setTerritorio('Espírito Santo')" class="territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer">Espírito Santo</button>
         </div>
 
         <!-- Grid de Materiais -->
@@ -129,7 +129,7 @@
     <!-- MODAL: Subir / Editar Material -->
     <div id="uploadModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="bg-gray-950 rounded-2xl max-w-md w-full p-6 border border-pink-500/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeUploadModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button type="button" onclick="closeUploadModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
             
@@ -199,8 +199,8 @@
                 </div>
 
                 <div class="pt-3 flex gap-2">
-                    <button type="button" onclick="closeUploadModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl">Cancelar</button>
-                    <button type="submit" id="saveMatBtn" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg">Salvar Material</button>
+                    <button type="button" onclick="closeUploadModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
+                    <button type="submit" id="saveMatBtn" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg cursor-pointer">Salvar Material</button>
                 </div>
             </form>
         </div>
@@ -209,7 +209,7 @@
     <!-- MODAL: Editar Mural -->
     <div id="muralModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="bg-gray-950 rounded-2xl max-w-md w-full p-6 border border-pink-500/40 shadow-2xl relative">
-            <button onclick="closeMuralModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+            <button type="button" onclick="closeMuralModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-pointer">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
             
@@ -229,35 +229,35 @@
                 </div>
 
                 <div class="pt-3 flex gap-2">
-                    <button type="button" onclick="closeMuralModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl">Cancelar</button>
-                    <button type="submit" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg">Salvar Mural</button>
+                    <button type="button" onclick="closeMuralModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold py-2.5 rounded-xl cursor-pointer">Cancelar</button>
+                    <button type="submit" class="w-1/2 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg cursor-pointer">Salvar Mural</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Lógica Vanilla JS + Firebase Seguro -->
+    <!-- Lógica Vanilla JS -->
     <script>
-    
-const firebaseConfig = {
-  apiKey: "AIzaSyDKIlUQOZeei-mjDKskYfPcNMtFH5JCpfw",
-  authDomain: "trade-leste-vivo-23220.firebaseapp.com",
-  projectId: "trade-leste-vivo-23220",
-  storageBucket: "trade-leste-vivo-23220.firebasestorage.app",
-  messagingSenderId: "877918917984",
-  appId: "1:877918917984:web:750eba355fd1a5ddcdba05"
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyDKILuQZeei-mjDK", 
+            authDomain: "trade-leste-vivo-23.firebaseapp.com",
+            projectId: "trade-leste-vivo-23",
+            storageBucket: "trade-leste-vivo-23.appspot.com",
+            messagingSenderId: "877918917984",
+            appId: "1:877918917984:web:750e"
+        };
+
         let db = null;
         let useFirebase = false;
 
         try {
-            if (typeof firebase !== 'undefined' && firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('COLE')) {
+            if (typeof firebase !== 'undefined' && firebaseConfig.apiKey && firebaseConfig.apiKey.startsWith('AIza')) {
                 firebase.initializeApp(firebaseConfig);
                 db = firebase.firestore();
                 useFirebase = true;
             }
         } catch (e) {
-            console.warn("Rodando em modo local sem Firebase:", e);
+            console.warn("Iniciando em modo local:", e);
         }
 
         let isAdmin = false;
@@ -269,17 +269,57 @@ const firebaseConfig = {
             { id: '3', title: 'Enxoval de Comunicação Regional Leste', category: 'Enxoval Território', channel: 'Loja Própria, PAP', territorio: 'Espírito Santo', date: '21/09/2026', format: 'ZIP', fileUrl: '#' }
         ];
 
-        if (useFirebase) {
-            db.collection("materials").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-                let remoteMaterials = [];
+        // Função do Botão de Acesso ADM (Garantida)
+        window.toggleAdmin = function() {
+            if (!isAdmin) {
+                const pass = prompt('Digite a senha de Administrador:');
+                if (pass === 'vivo123') {
+                    isAdmin = true;
+                    updateAdminUI();
+                    alert('Modo Administrador Ativado!');
+                } else if (pass !== null) {
+                    alert('Senha incorreta!');
+                }
+            } else {
+                isAdmin = false;
+                updateAdminUI();
+            }
+            renderMaterials();
+        };
+
+        function updateAdminUI() {
+            const adminBadge = document.getElementById('adminBadge');
+            const addMaterialBtnContainer = document.getElementById('addMaterialBtnContainer');
+            const admEditMuralBtn = document.getElementById('admEditMuralBtn');
+            const adminBtnText = document.getElementById('adminBtnText');
+
+            if (isAdmin) {
+                if (adminBadge) adminBadge.classList.remove('hidden');
+                if (addMaterialBtnContainer) addMaterialBtnContainer.classList.remove('hidden');
+                if (admEditMuralBtn) admEditMuralBtn.classList.remove('hidden');
+                if (adminBtnText) adminBtnText.innerText = 'Sair do Adm';
+            } else {
+                if (adminBadge) adminBadge.classList.add('hidden');
+                if (addMaterialBtnContainer) addMaterialBtnContainer.classList.add('hidden');
+                if (admEditMuralBtn) admEditMuralBtn.classList.add('hidden');
+                if (adminBtnText) adminBtnText.innerText = 'Acesso Adm';
+            }
+        }
+
+        if (useFirebase && db) {
+            db.collection("materials").onSnapshot(snapshot => {
+                let remoteList = [];
                 snapshot.forEach(doc => {
-                    remoteMaterials.push({ id: doc.id, ...doc.data() });
+                    remoteList.push({ id: doc.id, ...doc.data() });
                 });
-                if (remoteMaterials.length > 0) {
-                    materials = remoteMaterials;
+                if (remoteList.length > 0) {
+                    materials = remoteList;
                 }
                 renderMaterials();
-            }, err => console.log("Erro no Firestore:", err));
+            }, err => {
+                console.warn("Comunicação Firebase:", err);
+                renderMaterials();
+            });
 
             db.collection("settings").doc("mural").onSnapshot(doc => {
                 if (doc.exists) {
@@ -287,12 +327,15 @@ const firebaseConfig = {
                     if (data.title) document.getElementById('muralTitle').innerText = data.title;
                     if (data.desc) document.getElementById('muralDesc').innerText = data.desc;
                 }
-            });
+            }, err => console.warn("Erro ao obter Mural:", err));
         }
 
         function renderMaterials() {
             const grid = document.getElementById('materialsGrid');
-            const search = document.getElementById('searchInput').value.toLowerCase();
+            if (!grid) return;
+
+            const searchInput = document.getElementById('searchInput');
+            const search = searchInput ? searchInput.value.toLowerCase() : '';
 
             const filtered = materials.filter(m => {
                 const matchesSearch = (m.title || '').toLowerCase().includes(search) || 
@@ -304,7 +347,7 @@ const firebaseConfig = {
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado.</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-sm">Nenhum material encontrado no repositório.</div>`;
                 return;
             }
 
@@ -312,22 +355,22 @@ const firebaseConfig = {
                 <div class="bg-black/60 rounded-2xl p-4 border border-pink-900/30 flex flex-col justify-between neon-card transition duration-300">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-pink-500/20 text-pink-300 border border-pink-500/40 uppercase tracking-wider">${m.category}</span>
+                            <span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-pink-500/20 text-pink-300 border border-pink-500/40 uppercase tracking-wider">${m.category || 'Geral'}</span>
                             <span class="text-xs font-bold text-gray-400 bg-gray-900/80 px-2 py-0.5 rounded-md">${m.territorio || m.uf || 'Geral'}</span>
                         </div>
-                        <h3 class="font-bold text-white text-sm mb-1 line-clamp-2">${m.title}</h3>
+                        <h3 class="font-bold text-white text-sm mb-1 line-clamp-2">${m.title || 'Sem título'}</h3>
                         <p class="text-[11px] text-gray-400 mb-3">
-                            <i class="fa-regular fa-calendar-check mr-1 text-pink-400"></i>${m.date} • <span class="text-pink-200/80">${m.channel}</span>
+                            <i class="fa-regular fa-calendar-check mr-1 text-pink-400"></i>${m.date || ''} • <span class="text-pink-200/80">${m.channel || 'Todos os Canais'}</span>
                         </p>
                     </div>
                     <div class="flex items-center justify-between border-t border-gray-800/80 pt-3 mt-2">
-                        <a href="${m.fileUrl || '#'}" ${m.fileUrl && m.fileUrl !== '#' ? 'target="_blank"' : ''} download="${m.title}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow">
+                        <a href="${m.fileUrl || '#'}" ${m.fileUrl && m.fileUrl !== '#' ? 'target="_blank"' : ''} download="${m.title || 'material'}" class="bg-gradient-to-r from-pink-600 to-purple-700 hover:from-pink-500 hover:to-purple-600 text-white text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow cursor-pointer">
                             <i class="fa-solid fa-download"></i> Baixar (${m.format || 'PDF'})
                         </a>
                         ${isAdmin ? `
                             <div class="flex items-center gap-2">
-                                <button onclick="openEditModal('${m.id}')" class="text-pink-400 hover:text-pink-300 text-xs font-bold p-1" title="Editar"><i class="fa-solid fa-pen"></i></button>
-                                <button onclick="deleteMaterial('${m.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold p-1" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="button" onclick="openEditModal('${m.id}')" class="text-pink-400 hover:text-pink-300 text-xs font-bold p-1 cursor-pointer" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                                <button type="button" onclick="deleteMaterial('${m.id}')" class="text-red-400 hover:text-red-300 text-xs font-bold p-1 cursor-pointer" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
                             </div>
                         ` : ''}
                     </div>
@@ -335,44 +378,21 @@ const firebaseConfig = {
             `).join('');
         }
 
-        function toggleAdmin() {
-            if (!isAdmin) {
-                const pass = prompt('Digite a senha de Administrador:');
-                if (pass === 'vivo123') {
-                    isAdmin = true;
-                    document.getElementById('adminBadge').classList.remove('hidden');
-                    document.getElementById('addMaterialBtnContainer').classList.remove('hidden');
-                    document.getElementById('admEditMuralBtn').classList.remove('hidden');
-                    document.getElementById('adminBtnText').innerText = 'Sair do Adm';
-                    alert('Modo Administrador Ativado!');
-                } else if (pass !== null) {
-                    alert('Senha incorreta!');
-                }
-            } else {
-                isAdmin = false;
-                document.getElementById('adminBadge').classList.add('hidden');
-                document.getElementById('addMaterialBtnContainer').classList.add('hidden');
-                document.getElementById('admEditMuralBtn').classList.add('hidden');
-                document.getElementById('adminBtnText').innerText = 'Acesso Adm';
-            }
-            renderMaterials();
-        }
-
-        function setTerritorio(ter) {
+        window.setTerritorio = function(ter) {
             selectedTerritorio = ter;
             const territorios = ['TODOS', 'Grande Rio', 'Rio Litoral', 'Rio Interior', 'Espírito Santo'];
             territorios.forEach(t => {
                 const btn = document.getElementById(`btnTerritorio-${t}`);
                 if (btn) {
                     if (t === ter) {
-                        btn.className = "territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md";
+                        btn.className = "territorio-filter bg-gradient-to-r from-pink-600 to-purple-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer";
                     } else {
-                        btn.className = "territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition";
+                        btn.className = "territorio-filter bg-black/40 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-pink-900/40 transition cursor-pointer";
                     }
                 }
             });
             renderMaterials();
-        }
+        };
 
         function getSelectedChannels() {
             const checkboxes = document.querySelectorAll('input[name="channelOption"]:checked');
@@ -394,34 +414,34 @@ const firebaseConfig = {
             });
         }
 
-        function openUploadModal() {
+        window.openUploadModal = function() {
             document.getElementById('editingId').value = '';
             document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-cloud-arrow-up text-pink-500"></i> Adicionar Novo Material`;
             document.getElementById('uploadForm').reset();
             setSelectedChannels('Todos os Canais');
             document.getElementById('uploadModal').classList.remove('hidden');
-        }
+        };
 
-        function openEditModal(id) {
+        window.openEditModal = function(id) {
             const mat = materials.find(m => String(m.id) === String(id));
             if (!mat) return;
 
             document.getElementById('editingId').value = mat.id;
             document.getElementById('modalFormTitle').innerHTML = `<i class="fa-solid fa-pen text-pink-500"></i> Editar Material`;
-            document.getElementById('matTitle').value = mat.title;
+            document.getElementById('matTitle').value = mat.title || '';
             document.getElementById('matTerritorio').value = mat.territorio || mat.uf || 'Geral';
-            document.getElementById('matCategory').value = mat.category;
+            document.getElementById('matCategory').value = mat.category || 'Outros';
             document.getElementById('matFileUrl').value = mat.fileUrl || '';
-            setSelectedChannels(mat.channel);
+            setSelectedChannels(mat.channel || '');
 
             document.getElementById('uploadModal').classList.remove('hidden');
-        }
+        };
 
-        function closeUploadModal() {
+        window.closeUploadModal = function() {
             document.getElementById('uploadModal').classList.add('hidden');
-        }
+        };
 
-        function handleUpload(e) {
+        window.handleUpload = function(e) {
             e.preventDefault();
 
             const editingId = document.getElementById('editingId').value;
@@ -435,7 +455,7 @@ const firebaseConfig = {
             let fileUrl = fileUrlInput || '#';
             let format = 'PDF';
 
-            if (fileInput.files.length > 0) {
+            if (fileInput && fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 format = file.name.split('.').pop().toUpperCase();
                 fileUrl = URL.createObjectURL(file);
@@ -451,11 +471,11 @@ const firebaseConfig = {
                 channel,
                 fileUrl,
                 format,
-                date: dateStr
+                date: dateStr,
+                createdAt: Date.now()
             };
 
-            if (useFirebase) {
-                payload.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+            if (useFirebase && db) {
                 if (editingId) {
                     db.collection("materials").doc(editingId).update(payload)
                         .then(() => closeUploadModal())
@@ -475,19 +495,19 @@ const firebaseConfig = {
                 renderMaterials();
                 closeUploadModal();
             }
-        }
+        };
 
-        function openMuralModal() {
+        window.openMuralModal = function() {
             document.getElementById('editMuralTitle').value = document.getElementById('muralTitle').innerText;
             document.getElementById('editMuralDesc').value = document.getElementById('muralDesc').innerText;
             document.getElementById('muralModal').classList.remove('hidden');
-        }
+        };
 
-        function closeMuralModal() {
+        window.closeMuralModal = function() {
             document.getElementById('muralModal').classList.add('hidden');
-        }
+        };
 
-        function handleMuralSave(e) {
+        window.handleMuralSave = function(e) {
             e.preventDefault();
             const title = document.getElementById('editMuralTitle').value;
             const desc = document.getElementById('editMuralDesc').value;
@@ -495,18 +515,18 @@ const firebaseConfig = {
             document.getElementById('muralTitle').innerText = title;
             document.getElementById('muralDesc').innerText = desc;
 
-            if (useFirebase) {
+            if (useFirebase && db) {
                 db.collection("settings").doc("mural").set({ title, desc })
                     .then(() => closeMuralModal())
-                    .catch(err => alert("Erro no mural: " + err.message));
+                    .catch(err => alert("Erro ao salvar mural: " + err.message));
             } else {
                 closeMuralModal();
             }
-        }
+        };
 
-        function deleteMaterial(id) {
-            if (confirm('Excluir este material do repositório?')) {
-                if (useFirebase) {
+        window.deleteMaterial = function(id) {
+            if (confirm('Deseja realmente excluir este material permanentemente?')) {
+                if (useFirebase && db) {
                     db.collection("materials").doc(id).delete()
                         .catch(err => alert("Erro ao excluir: " + err.message));
                 } else {
@@ -514,8 +534,9 @@ const firebaseConfig = {
                     renderMaterials();
                 }
             }
-        }
+        };
 
+        // Renderização inicial
         renderMaterials();
     </script>
 </body>
