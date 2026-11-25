@@ -438,13 +438,44 @@
            closeMuralModal();
        };
        window.deleteMaterial = async function(id) {
-           if (confirm('Deseja realmente excluir este material permanentemente?')) {
-               if (_supabase) {
-                   await _supabase.from('materials').delete().eq('id', id);
-                   await fetchSupabaseData();
-               }
-           }
-       };
+  if (!confirm('Deseja realmente excluir este material permanentemente?')) return;
+
+  const material = materials.find(m => String(m.id) === String(id));
+
+  if (!_supabase || !material) return;
+
+  const fileUrl = material.fileurl || material.fileUrl || '';
+  const marker = '/storage/v1/object/public/materiais/';
+
+  // Se o arquivo estiver no Supabase Storage, exclui o arquivo físico
+  if (fileUrl.includes(marker)) {
+    const filePath = decodeURIComponent(
+      fileUrl.split(marker)[1].split('?')[0]
+    );
+
+    const { error: storageError } = await _supabase.storage
+      .from('materiais')
+      .remove([filePath]);
+
+    if (storageError) {
+      alert('Erro ao excluir o arquivo do Storage: ' + storageError.message);
+      return;
+    }
+  }
+
+  // Exclui o registro da tabela
+  const { error } = await _supabase
+    .from('materials')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    alert('Erro ao excluir o material: ' + error.message);
+    return;
+  }
+
+  await fetchSupabaseData();
+};
        // Inicialização
        fetchSupabaseData();
        renderMaterials();
